@@ -1,6 +1,9 @@
+import java.util.Scanner;
 class Book{
     String bookName,authorName,publisher;
     int isbn;
+    private int i = 0;
+    Book bookArr[] = new Book[30];
     Book(String bn , String an, String p , int i){
         bookName = bn;
         authorName = an;
@@ -41,23 +44,39 @@ class Book{
         return info;
 
     }
+    void storeBook(Book ob){
+        i = i + 1;
+        bookArr[i] = ob;
+    }
 }
 
 class BookMain {
     public static void main(String[] args) {
+        //created a scanner object to take input from users
+        Scanner scan = new Scanner(System.in);
+        //created two book objects 1) non parametaried 2) zero parametarized
         Book book1 = new Book("The Indian Girl","Chetan Bhagat", "Chetan Publications" , 19125672);
         Book book2 = new Book();
-        int j;
-        book1.setBookName("University Of Success");
-        book2.setAuthorName("Dale Nortan");
-        book2.setPublisher("Wish Publications");
-        book2.setIsbn(19284903);
+        Book book3 = new Book();
+        // setting instances of the objects using set method
+        System.out.println("enter the Book name :");
+        String bookname = scan.nextLine();
+        book1.setBookName(bookname);
+        System.out.println("enter the Author name :");
+        String authorname = scan.nextLine();
+        book2.setAuthorName(authorname);
+        System.out.println("enter Publisher name :");
+        String pub = scan.nextLine();
+        book2.setPublisher(pub);
+        System.out.println("enter the ISBN number :");
+        int isb = scan.nextInt();
+        book2.setIsbn(isb);
+        //printing final verdict
         book2.getBookInfo();
-        Book bookArray[] = new Book[30];
-        bookArray[0] = book1;
-        bookArray[1] = book2;
-        for(j=0;j<30;j++){
-            System.out.println(bookArray[j].getBookInfo());
+        book3.storeBook(book1);
+        book3.storeBook(book2);
+        for(int i = 0;i<book3.bookArr.length;i++){
+            System.out.println(book3.bookArr[i].getBookInfo());
         }
     }
 }
